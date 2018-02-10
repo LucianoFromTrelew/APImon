@@ -1,7 +1,8 @@
 # APImon
 A simple API REST for pokemons
 
-## Pokeball design taken from [this](https://codepen.io/bad_printer/pen/Einpz) codepen
+#### Pokeball design taken from [this](https://codepen.io/bad_printer/pen/Einpz) codepen
+#### Server powered by [json-server](https://github.com/typicode/json-server)
 
 # Usage
 It's quite simple, just clone the repo, install dependencies, and run the server!
