@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="./static/css/style.css" media="all">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" media="all">
+</head>
+<body>
+
+  <div class="header" >
+    <img src="./static/image/APImon.png" alt="">
+  </div> 
+
+
+  <div id="app">
+    <div class="row">
+      <div class="col-2">
+        <div class="box" @click="displayPokemon"></div>
+      </div>
+      <div class="col-10">
+        <div class="pokemon-container" v-show="isLoaded">
+          <img :src="pokemon.img" class="pokemon" alt="">
+          <div class="pokemon-data" v-for="(value, key) in pokemon">
+            <p><b>{{key}}</b>: {{value}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="./static/js/string.js"></script>
+  <script src="./static/js/randomInt.js"></script>
+  <script src="./static/js/emptyObject.js"></script>
+</body>
+
+  <script>
+    const MIN = 1
+    const MAX = 750
+
+    new Vue({
+      el: "#app",
+      data(){
+        return{
+          pokemon: {},
+        }
+      },
+      computed:{
+        isLoaded(){
+          return !isEmpty(this.pokemon)
+        }
+      },
+      //watch:{
+      // imgSrc(newValue, oldValue){
+      //   console.log(`the image just changed! from ${oldValue || 'nuthin'} to ${newValue}`)
+      // }
+      //,
+      methods:{
+        displayPokemon(event){
+          let self = this
+          axios.get(`http://127.0.0.1:3000/pokemons/${getRandomInt(MIN, MAX)}`)
+            .then(function(response){
+              for(let key in response.data){
+                self.$set(self.pokemon, key, response.data[key])
+              }
+            })
+        }
+      }
+    })
+  </script>
+
+</html>
