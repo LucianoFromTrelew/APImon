@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title></title>
   <link rel="stylesheet" href="./static/css/style.css" media="all">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" media="all">
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" media="all">
 </head>
 <body>
 
@@ -21,8 +21,10 @@
       <div class="col-10">
         <div class="pokemon-container" v-show="isLoaded">
           <img :src="pokemon.img" class="pokemon" alt="">
-          <div class="pokemon-data" v-for="(value, key) in pokemon">
-            <p><b>{{key}}</b>: {{value}}</p>
+          <div class="pokemon-data">
+            <p v-for="(value, key) in pokemon">
+              <b>{{key}}</b>: {{value}}
+            </p>
           </div>
         </div>
       </div>
@@ -32,8 +34,8 @@
   
 
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+  <script src="./node_modules/vue/dist/vue.min.js"></script>
+  <script src="./node_modules/axios/dist/axios.min.js"></script>
   <script src="./static/js/string.js"></script>
   <script src="./static/js/randomInt.js"></script>
   <script src="./static/js/emptyObject.js"></script>
