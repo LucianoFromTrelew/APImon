@@ -42,8 +42,10 @@
 </body>
 
   <script>
-    const MIN = 1
-    const MAX = 750
+    const MIN = 1;
+    const MAX = 750;
+    const URL = "http://127.0.0.1";
+    const PORT = 3000;
 
     new Vue({
       el: "#app",
@@ -54,23 +56,23 @@
       },
       computed:{
         isLoaded(){
-          return !isEmpty(this.pokemon)
+          return !isEmpty(this.pokemon);
         }
       },
-      //watch:{
-      // imgSrc(newValue, oldValue){
-      //   console.log(`the image just changed! from ${oldValue || 'nuthin'} to ${newValue}`)
-      // }
-      //,
       methods:{
         displayPokemon(event){
-          let self = this
-          axios.get(`http://127.0.0.1:3000/pokemons/${getRandomInt(MIN, MAX)}`)
-            .then(function(response){
-              for(let key in response.data){
-                self.$set(self.pokemon, key, response.data[key])
+          const getPokemonURL = 
+            `${URL}:${PORT}/pokemons/${getRandomInt(MIN, MAX)}`;
+
+          axios.get(getPokemonURL)
+            .then(res => {
+              for (const key in res.data) {
+                this.$set(this.pokemon, key, res.data[key]);
               }
             })
+            .catch(err => {
+              alert("Could not retrieve pokemon :(");
+            });
         }
       }
     })
